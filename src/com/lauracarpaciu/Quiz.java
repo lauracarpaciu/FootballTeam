@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Quiz {
 
 
-    private static final int NO_OF_QTIONS = 26;
+    private static final int NO_OF_QTIONS = 3;
     boolean done = false;
     Scanner scanner = new Scanner(System.in);
     private int score;
