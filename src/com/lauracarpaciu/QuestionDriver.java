@@ -6,5 +6,6 @@ public class QuestionDriver {
 	Quiz quiz =new Quiz();
 
 	quiz.start();
+	quiz.displayResults();
     }
 }
