@@ -32,11 +32,11 @@ public class Quiz {
                 String useranswer = scanner.nextLine();
                 if (useranswer.equalsIgnoreCase(question.getAnswer())) {
                     score++;
-                    System.out.println("Bravo.Raspuns corect");
+                    System.out.println("Bravo. Raspuns corect!\n");
                 } else {
 
-                    System.out.println("Raspuns nu este corect");
-                    System.out.println("Raspunsul corect este " + question.getAnswer());
+                    System.out.println("Raspuns nu este corect!");
+                    System.out.println("Raspunsul corect este " + question.getAnswer() + ".\n");
                 }
             }
             done = true;
@@ -59,11 +59,11 @@ public class Quiz {
     }
 
     private void displayTimeElapsed() {
-        System.out.printf("Ati avut nevoie de aproximativ %d secunde pentru a raspunde la un numar de %s intrebari", timeElapsed, NO_OF_QTIONS);
+        System.out.printf("Ati avut nevoie de aproximativ %d secunde pentru a raspunde la un numar de %s intrebari.\n", timeElapsed, NO_OF_QTIONS);
     }
 
     private void displayScore() {
-        System.out.printf("Scorul Dvs. final este %d/%d", score, NO_OF_QTIONS);
+        System.out.printf("Scorul Dvs. final este %d/%d\n", score, NO_OF_QTIONS);
     }
 
     public ArrayList<Question> generate(int nrIntrebari) {
@@ -94,7 +94,7 @@ public class Quiz {
             String echipa = data[index][0];
             String capitanul = data[index][1];
 
-            String questiontext = String.format("Care este capitanul echipei?:%s", echipa);
+            String questiontext = String.format("Care este capitanul echipei %s?", echipa);
 
             questions.add(new Question(questiontext, capitanul));
 
