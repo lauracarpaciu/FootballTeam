@@ -2,6 +2,7 @@ package com.lauracarpaciu;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -20,9 +21,18 @@ public class GUIQuiz {
 
     }
 
-    private static String[][] getData() {
+    private static HashMap<String, String> getData() {
 
-        String[][] data = {{"FC Real Madrid", "Cristiano Ronaldo"}, {"FC Villarreal", "Bruno Soriano"}, {"FC Barcelona", "Lionel Messi"}, {"FC Atl. Madrid", "Gabriel Fernández"}, {"FC Sevilla", "Julien Escudé"}, {"FC Valencia", "Dani Parejo"}, {"FC Ath. Bilbao", "Gorka Iraizoz"}, {"FC Espanyol", "Javi López"}};
+        HashMap<String, String> data = new HashMap<>();
+        data.put("FC Real Madrid", "Cristiano Ronaldo");
+        data.put("FC Villarreal", "Bruno Soriano");
+        data.put("FC Barcelona", "Lionel Messi");
+        data.put("FC Atl. Madrid", "Gabriel Fernández");
+        data.put("FC Sevilla", "Julien Escudé");
+        data.put("FC Valencia", "Dani Parejo");
+        data.put("FC Ath. Bilbao", "Gorka Iraizoz");
+        data.put("FC Espanyol", "Javi López");
+
         return data;
 
 
@@ -58,7 +68,6 @@ public class GUIQuiz {
     }
 
 
-
     public void displayResults() {
         if (done) {
             displayScore();
@@ -75,7 +84,6 @@ public class GUIQuiz {
     }
 
 
-
     private void displayScore() {
         JOptionPane.showMessageDialog(null, String.format("Scorul Dvs. final este %d/%d\n", score, nrIntrebari));
     }
@@ -83,31 +91,34 @@ public class GUIQuiz {
 
     public ArrayList<Question> generate(int nrIntrebari) {
 
-        String[][] data = getData();
+        Random random = new Random();
 
-        if (nrIntrebari > data.length) {
+        HashMap<String, String> data = getData();
 
-            throw new IllegalArgumentException("Nu sunt decat " + data.length + " intrebari posibile!");
+
+        if (nrIntrebari > data.size()) {
+
+            throw new IllegalArgumentException("Nu sunt decat " + data.size() + " intrebari posibile!");
         }
 
         ArrayList<Question> questions = new ArrayList<>();
+        ArrayList<String> echipe = new ArrayList<>();
 
-        int index;
+        for (String echipa :
+                data.keySet()) {
+            echipe.add(echipa);
 
-        ArrayList<Integer> IndexDejaluat = new ArrayList<>();
-        IndexDejaluat.clear();
+        }
+
 
         for (int i = 0; i < nrIntrebari; i++) {
 
-            do {
-                Random random = new Random();
-                index = random.nextInt(data.length);
-            } while (IndexDejaluat.contains(index));
-            IndexDejaluat.add(index);
 
+            String echipa = echipe.get(random.nextInt(echipe.size()));
 
-            String echipa = data[index][0];
-            String capitanul = data[index][1];
+            String capitanul = data.get(echipa);
+            echipe.remove(random.nextInt(echipe.size()));
+
 
             String questiontext = String.format("Care este capitanul echipei %s?", echipa);
 
