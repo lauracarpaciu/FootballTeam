@@ -1,17 +1,24 @@
 package com.lauracarpaciu;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Quiz {
-
+public class GUIQuiz {
 
     private static final int NO_OF_QTIONS = 3;
     boolean done = false;
-    Scanner scanner = new Scanner(System.in);
-    private int score;
+    private int score, nrIntrebari;
     private long timeElapsed;
+
+
+    public GUIQuiz(int nrIntrebari) {
+
+
+        this.nrIntrebari = nrIntrebari;
+
+    }
 
     private static String[][] getData() {
 
@@ -26,17 +33,16 @@ public class Quiz {
         try {
             long startTime = System.currentTimeMillis();
 
-            for (Question question : generate(NO_OF_QTIONS)
+            for (Question question : generate(nrIntrebari)
                     ) {
-                System.out.println(question.getText());
-                String useranswer = scanner.nextLine();
+                String useranswer = JOptionPane.showInputDialog(question.getText());
+
                 if (useranswer.equalsIgnoreCase(question.getAnswer())) {
                     score++;
-                    System.out.println("Bravo. Raspuns corect!\n");
+                    JOptionPane.showMessageDialog(null, "Bravo. Raspuns corect!\n");
                 } else {
 
-                    System.out.println("Raspuns nu este corect!");
-                    System.out.println("Raspunsul corect este " + question.getAnswer() + ".\n");
+                    JOptionPane.showMessageDialog(null, String.format("Raspuns nu este corect!\nRaspunsul corect este " + question.getAnswer() + ".\n"));
                 }
             }
             done = true;
@@ -51,6 +57,8 @@ public class Quiz {
         return (int) timeInMilliseconds / 1000;
     }
 
+
+
     public void displayResults() {
         if (done) {
             displayScore();
@@ -59,12 +67,19 @@ public class Quiz {
     }
 
     private void displayTimeElapsed() {
-        System.out.printf("Ati avut nevoie de aproximativ %d secunde pentru a raspunde la un numar de %s intrebari.\n", timeElapsed, NO_OF_QTIONS);
+
+
+        JOptionPane.showMessageDialog(null, String.format("Ati avut nevoie de aproximativ %d secunde pentru a raspunde la un numar de %s intrebari.\n", timeElapsed, nrIntrebari));
+
+
     }
 
+
+
     private void displayScore() {
-        System.out.printf("Scorul Dvs. final este %d/%d\n", score, NO_OF_QTIONS);
+        JOptionPane.showMessageDialog(null, String.format("Scorul Dvs. final este %d/%d\n", score, nrIntrebari));
     }
+
 
     public ArrayList<Question> generate(int nrIntrebari) {
 
@@ -101,6 +116,5 @@ public class Quiz {
         }
         return questions;
     }
-
 
 }
