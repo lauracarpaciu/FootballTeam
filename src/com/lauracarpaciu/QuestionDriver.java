@@ -3,8 +3,7 @@ package com.lauracarpaciu;
 public class QuestionDriver {
 
     public static void main(String[] args) {
-        GUIQuiz quiz = new GUIQuiz(8);
-
+       ConsolaQuiz quiz = new ConsolaQuiz(1);
         quiz.start();
         quiz.displayResults();
     }

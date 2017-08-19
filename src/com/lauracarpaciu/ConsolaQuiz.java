@@ -4,22 +4,19 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class ColsolaQuiz {
+public class ConsolaQuiz {
 
 
-    private static final int NO_OF_QTIONS = 3;
+    private static final int NO_OF_QTIONS = 6;
     boolean done = false;
     Scanner scanner = new Scanner(System.in);
     private int score, nrIntrebari;
     private long timeElapsed;
 
-
-    public ColsolaQuiz(int nrIntrebari) {
-
-
+    public ConsolaQuiz(int nrIntrebari) {
         this.nrIntrebari = nrIntrebari;
-
     }
+
 
     private static String[][] getData() {
 
@@ -29,10 +26,13 @@ public class ColsolaQuiz {
 
     }
 
+
     public void start() {
+
 
         try {
             long startTime = System.currentTimeMillis();
+
 
             for (Question question : generate(nrIntrebari)
                     ) {
@@ -45,6 +45,8 @@ public class ColsolaQuiz {
 
                     System.out.println("Raspuns nu este corect!");
                     System.out.println("Raspunsul corect este " + question.getAnswer() + ".\n");
+
+
                 }
             }
             done = true;
@@ -53,6 +55,7 @@ public class ColsolaQuiz {
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         }
+
     }
 
     private int getTimeElapsedInSeconds(long timeInMilliseconds) {
@@ -60,11 +63,35 @@ public class ColsolaQuiz {
     }
 
     public void displayResults() {
+
+        char replayUser;
+
+        do {
+            start();
+
         if (done) {
             displayScore();
             displayTimeElapsed();
         }
+
+
+            do {
+                System.out.println("Doriti sa continuati? D/N");
+
+                replayUser = scanner.nextLine().toLowerCase().charAt(0);
+
+            } while (replayUser != 'd' && replayUser != 'n');
+
+
+        } while (replayUser == 'd');
+
+
+        System.out.println("La revedere!.Apasati \"Enter\"");
+        scanner.nextLine();
+        scanner.close();
     }
+
+
 
     private void displayTimeElapsed() {
         System.out.printf("Ati avut nevoie de aproximativ %d secunde pentru a raspunde la un numar de %s intrebari.\n", timeElapsed, nrIntrebari);
