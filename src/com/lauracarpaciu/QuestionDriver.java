@@ -1,10 +1,9 @@
 package com.lauracarpaciu;
 
-public class QuestionDriver {
+class QuestionDriver {
 
     public static void main(String[] args) {
-       ConsolaQuiz quiz = new ConsolaQuiz(1);
-        quiz.start();
-        quiz.displayResults();
+       GUIQuiz quiz = new GUIQuiz(2);
+       quiz.displayResults();
     }
 }

@@ -6,19 +6,15 @@ import java.util.HashMap;
 import java.util.Random;
 
 
-public class GUIQuiz {
+class GUIQuiz {
 
-    private static final int NO_OF_QTIONS = 3;
-    boolean done = false;
-    private int score, nrIntrebari;
+
+    private int score;
+    private final int nrIntrebari;
     private long timeElapsed;
 
-
     public GUIQuiz(int nrIntrebari) {
-
-
         this.nrIntrebari = nrIntrebari;
-
     }
 
     private static HashMap<String, String> getData() {
@@ -38,8 +34,7 @@ public class GUIQuiz {
 
     }
 
-    public void start() {
-
+    private void start() {
         try {
             long startTime = System.currentTimeMillis();
 
@@ -51,11 +46,9 @@ public class GUIQuiz {
                     score++;
                     JOptionPane.showMessageDialog(null, "Bravo. Raspuns corect!\n");
                 } else {
-
                     JOptionPane.showMessageDialog(null, String.format("Raspuns nu este corect!\nRaspunsul corect este " + question.getAnswer() + ".\n"));
                 }
             }
-            done = true;
             long endTime = System.currentTimeMillis();
             timeElapsed = getTimeElapsedInSeconds(endTime - startTime);
         } catch (IllegalArgumentException e) {
@@ -69,27 +62,26 @@ public class GUIQuiz {
 
 
     public void displayResults() {
-        if (done) {
+        int replyUser;
+        do {
+            start();
             displayScore();
             displayTimeElapsed();
-        }
+            replyUser = JOptionPane.showConfirmDialog(null, "Doriti sa continuati?", "Confirmare", JOptionPane.YES_NO_OPTION);
+        } while (replyUser == 0);
+        JOptionPane.showMessageDialog(null, "La revedere!Apasati \"Enter\"");
     }
 
     private void displayTimeElapsed() {
-
-
         JOptionPane.showMessageDialog(null, String.format("Ati avut nevoie de aproximativ %d secunde pentru a raspunde la un numar de %s intrebari.\n", timeElapsed, nrIntrebari));
-
-
     }
-
 
     private void displayScore() {
         JOptionPane.showMessageDialog(null, String.format("Scorul Dvs. final este %d/%d\n", score, nrIntrebari));
     }
 
 
-    public ArrayList<Question> generate(int nrIntrebari) {
+    private ArrayList<Question> generate(int nrIntrebari) {
 
         Random random = new Random();
 

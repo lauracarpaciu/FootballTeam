@@ -1,6 +1,6 @@
 package com.lauracarpaciu;
 
-public class Question {
+class Question {
 
     private String text;
     private String answer;

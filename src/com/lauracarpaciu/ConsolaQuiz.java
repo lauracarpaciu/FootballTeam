@@ -4,30 +4,27 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class ConsolaQuiz {
+class ConsolaQuiz {
 
 
     private static final int NO_OF_QTIONS = 6;
-    boolean done = false;
-    Scanner scanner = new Scanner(System.in);
-    private int score, nrIntrebari;
+    private boolean done = false;
+    private final Scanner scanner = new Scanner(System.in);
+    private int score;
+    private final int nrIntrebari;
     private long timeElapsed;
 
-    public ConsolaQuiz(int nrIntrebari) {
+    private ConsolaQuiz(int nrIntrebari) {
         this.nrIntrebari = nrIntrebari;
     }
 
 
     private static String[][] getData() {
-
-        String[][] data = {{"FC Real Madrid", "Cristiano Ronaldo"}, {"FC Villarreal", "Bruno Soriano"}, {"FC Barcelona", "Lionel Messi"}, {"FC Atl. Madrid", "Gabriel Fernández"}, {"FC Sevilla", "Julien Escudé"}, {"FC Valencia", "Dani Parejo"}, {"FC Ath. Bilbao", "Gorka Iraizoz"}, {"FC Espanyol", "Javi López"}};
+        String [][] data = {{"FC Real Madrid", "Cristiano Ronaldo"}, {"FC Villarreal", "Bruno Soriano"}, {"FC Barcelona", "Lionel Messi"}, {"FC Atl. Madrid", "Gabriel Fernández"}, {"FC Sevilla", "Julien Escudé"}, {"FC Valencia", "Dani Parejo"}, {"FC Ath. Bilbao", "Gorka Iraizoz"}, {"FC Espanyol", "Javi López"}};
         return data;
-
-
     }
 
-
-    public void start() {
+    private void start() {
 
 
         try {
@@ -69,10 +66,10 @@ public class ConsolaQuiz {
         do {
             start();
 
-        if (done) {
-            displayScore();
-            displayTimeElapsed();
-        }
+            if (done) {
+                displayScore();
+                displayTimeElapsed();
+            }
 
 
             do {
@@ -92,7 +89,6 @@ public class ConsolaQuiz {
     }
 
 
-
     private void displayTimeElapsed() {
         System.out.printf("Ati avut nevoie de aproximativ %d secunde pentru a raspunde la un numar de %s intrebari.\n", timeElapsed, nrIntrebari);
     }
@@ -101,7 +97,7 @@ public class ConsolaQuiz {
         System.out.printf("Scorul Dvs. final este %d/%d\n", score, nrIntrebari);
     }
 
-    public ArrayList<Question> generate(int nrIntrebari) {
+    private ArrayList<Question> generate(int nrIntrebari) {
 
         String[][] data = getData();
 
@@ -117,7 +113,7 @@ public class ConsolaQuiz {
         ArrayList<Integer> IndexDejaluat = new ArrayList<>();
         IndexDejaluat.clear();
 
-        for (int i = 0; i < nrIntrebari; i++) {
+        for (int i = 1; i <= nrIntrebari; i++) {
 
             do {
                 Random random = new Random();
